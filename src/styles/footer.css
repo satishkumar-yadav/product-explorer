@@ -1,30 +1,30 @@
 
-footer {
+/* footer {
   width: 100%;
   height: 100px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   /* position:sticky;
-  bottom: 0px; */
-}
+  bottom: 0px; */ /*
+} */
 
-.bottom-bar {
+/* .bottom-bar {
   display: flex;
   align-items: center;
   padding: 10px 20px;
   background-color: #002147;
   color: white;
-}
+} */
 
-.logo {
+/* .logo {
   padding-top: 35px;
   text-align: center;
   margin-right: 15px;
-} 
+}  */
 
-.name {
+/* .name {
   font-size: 1.8rem;
   font-weight: bold;
-}
+} */
 
 
 

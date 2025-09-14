@@ -6,7 +6,7 @@ import CategoryFilter from "../Product/CategoryFilter";
 import SortMenu from "../Product/SortMemu";
 import SearchBar from "../Searchbar/SearchBar";
 import ThemeToggle from "../ThemeToggle";
-// import UserMenu from "./UserMenu";
+// import UserMenu from "./UserMenu"; 
  
 const Header = ({ onWishlistClick, onCartClick }) => {
   const { loggedIn, user } = useSelector(s => s.user);
@@ -16,17 +16,39 @@ const Header = ({ onWishlistClick, onCartClick }) => {
   return (
     <>
     <header className="p-4 sticky h-10 bg-white dark:bg-gray-800 shadow flex justify-between items-center">
-      <Link className="font-bold text-xl" to="/"> Product Explorer</Link>
+      <Link className="font-bold text-xl hover:font-extrabold hover:text-lime-400" to="/"> Product Explorer</Link>
       {/* <h1 className="font-bold text-xl">Product Explorer</h1> */}
 
       <div className="flex items-center gap-5">
 
-        <button className="relative cursor-pointer" onClick={onWishlistClick} aria-label="wishlist">
+        {/* <button className="relative cursor-pointer" onClick={onWishlistClick} aria-label="wishlist">
           ❤️
           {wishlistCount > 0 && (
             <span className="absolute top-0 right-0 bg-red-500 text-white px-1 rounded-full text-xs">{wishlistCount}</span>
           )}
-        </button>
+        </button> 
+
+        <button className="relative cursor-pointer" onClick={onCartClick} aria-label="cart">
+          🛒
+          {cartCount > 0 && (
+            <span className="absolute top-0 right-0 bg-green-500 text-white px-1 rounded-full text-xs">{cartCount}</span>
+          )}
+        </button> */}
+
+        {/* <UserMenu loggedIn={loggedIn} user={user} onWishlistClick={onWishlistClick} onCartClick={onCartClick} onProfileClick="" /> */}
+
+        <ThemeToggle />
+
+        {loggedIn && (
+
+             <>
+           
+            <button className="relative cursor-pointer" onClick={onWishlistClick} aria-label="wishlist">
+          ❤️
+          {wishlistCount > 0 && (
+            <span className="absolute top-0 right-0 bg-red-500 text-white px-1 rounded-full text-xs">{wishlistCount}</span>
+          )}
+        </button> 
 
         <button className="relative cursor-pointer" onClick={onCartClick} aria-label="cart">
           🛒
@@ -35,25 +57,25 @@ const Header = ({ onWishlistClick, onCartClick }) => {
           )}
         </button>
 
-        {/* <UserMenu loggedIn={loggedIn} user={user} onWishlistClick={onWishlistClick} onCartClick={onCartClick} onProfileClick="" /> */}
-
-        {loggedIn && (
           <div className="relative group">
+
             <button className="font-semibold underline cursor-pointer">
-              {user.username}
+              {user.name}
             </button>
 
             <div className="absolute hidden group-hover:block group-focus:block left-0 mt-2 bg-white shadow rounded p-2 z-10">
-              <button className="block mb-2" onClick={onWishlistClick}>My Wishlist</button>
-              <button className="block" onClick={onCartClick}>Cart</button>
+              <button className="block mb-2 cursor-pointer hover:font-bold hover:underline hover:text-green-600" onClick={onWishlistClick}>My Wishlist</button>
+              <button className="block cursor-pointer hover:font-bold hover:underline hover:text-green-600" onClick={onCartClick}>Cart</button>
             </div>
  
           </div>
+
+            </>
         )}
  
-        <ThemeToggle />
         <AuthToggle />
       </div>
+
     </header> 
 
      <div className="flex gap-2 items-center mb-2">

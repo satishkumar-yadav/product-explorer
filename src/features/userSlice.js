@@ -8,7 +8,7 @@ const initialState = {
   loggedIn: !!getUser(),                                                                               // ! invert only, !! convert to boolean
 };
  
-const userSlice = createSlice({
+const userSlice = createSlice({ 
   name: "user",
   initialState,
   reducers: {

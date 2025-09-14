@@ -1,6 +1,6 @@
 
-
-
+import { Link } from "react-router-dom";
+ 
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -27,98 +27,76 @@ const LoginForm = () => {
   };
 
   return (
-<div className="bg-gradient-to-r min-h-screen lg:min-h-screen  from-cyan-500 to-blue-500">
-      <div className="flex justify-center py-10 ">
-        <div className="bg-white w-96 h-auto border border-gray-200 rounded-md">
-          <h1 className="text-center pt-4 text-[#0c2650] text-lg font-bold">
-            Login
-          </h1>
 
-          <div className="pl-8">
+    <main className="w-full h-screen flex flex-col items-center justify-center px-4">
 
-    {/* <form onSubmit={handleLogin} className="max-w-sm mx-auto bg-white p-6 rounded shadow mt-8"> */}
-      <form onSubmit={handleLogin}>
-      {/* <h2 className="text-xl font-bold mb-4">Login</h2> */}
-      
-       <div className="pt-6 text-sm">Email:</div>
+            <div className="max-w-sm w-full text-gray-600 shadow-2xl">
 
-        <div className="relative text-gray-600 focus-within:text-gray-400">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                  <button
-                    type="submit"
-                    className="p-1 focus:outline-none focus:shadow-outline"
-                  >
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      className="w-4 h-4"
+                <div className="text-center">
+                    {/* <img src="asset/loginlogo.svg" width={150} className="mx-auto" /> */}
+                    <div className="mt-5 space-y-2">
+                        <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Log in to your account</h3>
+                        <p className="">Don't have an account? <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">Sign up</Link></p>
+                    </div>
+                </div>
+
+                <form
+                   onSubmit={handleLogin}
+                    className="mt-8 space-y-5"
+                >
+                    <div>
+                        <label className="font-medium">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            value={email}
+                            placeholder="Enter your Email Address"
+                            onChange={e => setEmail(e.target.value)}
+                            required
+                            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-medium">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            value={password}
+                            placeholder="Enter your password"
+                            onChange={e => setPassword(e.target.value)}
+                            required
+                            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                        />
+                    </div>
+
+                    <button
+                        className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+                        type="submit"
                     >
-                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                  </button>
-                </span>
+                        Sign in
+                    </button>
 
-         <input
-        // className="block w-full mb-2 p-2 border rounded"
-        className="py-2 border-b-2 text-sm rounded-md pl-10 focus:outline-none w-10/12 focus:bg-white focus:text-gray-900"
-        type="email"
-        value={email}
-        placeholder="Enter your Email Address"
-        onChange={e => setEmail(e.target.value)}
-        required
-      />
+                    <div className="text-center">
+                        <Link to="/forget-password" className="hover:text-indigo-600">Forgot password?</Link>
+                    </div>
+                </form>
+            </div>
+        </main>
 
-     </div>
-
-        <div className="pt-6 text-sm">Password:</div>
-
-        <div className="relative text-gray-600 focus-within:text-gray-400">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                  <button
-                    type="submit"
-                    className="p-1 focus:outline-none focus:shadow-outline"
-                  >
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      className="w-4 h-4"
-                    >
-                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                  </button>
-                </span>
-
-      <input
-        // className="block w-full mb-2 p-2 border rounded"
-         className="py-2 border-b-2 text-sm rounded-md pl-10 focus:outline-none w-10/12 focus:bg-white focus:text-gray-900"
-        type="password"
-        value={password}
-        placeholder="Enter your password"
-        onChange={e => setPassword(e.target.value)}
-        required
-      />
-
-  </div>
-
-
-      <button className="bg-blue-600 text-white px-4 py-2 rounded w-full mt-2" type="submit">
-        Login
-      </button>
-    </form>
-
-           </div>
-         </div>
-      </div>
-    </div>
   );
 };
 
 export default LoginForm;
+
+
+
+
+
+
+
+
+
+

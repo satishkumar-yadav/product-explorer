@@ -1,15 +1,14 @@
-
-
-
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import googleLogo from "../../assets/google.png";
 import { register } from "../../features/userSlice";
  
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -20,7 +19,7 @@ const RegisterForm = () => {
       enqueueSnackbar("All fields are required!", { variant: "warning" });
       return;
     }
-    const userData = { email, password };
+    const userData = { name, email, password };
     dispatch(register(userData));
     localStorage.setItem("user", JSON.stringify(userData));
     enqueueSnackbar("Registration successful!", { variant: "success" });
@@ -29,144 +28,102 @@ const RegisterForm = () => {
 
   return (
 
-    <div className="bg-gradient-to-r min-h-screen lg:min-h-screen  from-cyan-500 to-blue-500">
-      <div className="flex justify-center py-10 ">
-        <div className="bg-white w-96 h-auto border border-gray-200 rounded-md">
-          <h1 className="text-center pt-4 text-[#0c2650] text-lg font-bold">
-            Sign up
-          </h1>
-          {message && (
-            <div className="px-11 py-4">
-              <div className="font-bold bg-gradient-to-r from-fuchsia-400 via-sky-400 to-violet-200 p-4  text-center text-white ">
-                {message}
-              </div>
-            </div>
-          )}
-
-          <div className="pl-8">
-
-           {/* <form onSubmit={handleRegister} className="max-w-sm mx-auto bg-white p-6 rounded shadow mt-8"> */}
-          <form onSubmit={handleRegister}>
-
-          <h2 className="text-xl font-bold mb-4">Register</h2>
-
-
-           {/* First Name */}
-          <div className="text-sm">First Name</div>
-
-            <div className="relative text-gray-600 focus-within:text-gray-400">
-
-    <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4"
-                  >
-                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                </span>
-
-      <input
-        // className="block w-full mb-2 p-2 border rounded"
-         className="py-2 border-b-2 text-sm rounded-md pl-10 focus:outline-none w-10/12 focus:bg-white focus:text-gray-900"
-        type="email"
-        value={email}
-        placeholder="Email"
-        onChange={e => setEmail(e.target.value)}
-        required
-      />
-
-            </div>
-
-            {/* Email */}
-            <div className="pt-6 text-sm">Email:</div>
-
-            <div className="relative text-gray-600 focus-within:text-gray-400">
-
-                <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                  <button
-                    type="submit"
-                    className="p-1 focus:outline-none focus:shadow-outline"
-                  >
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      className="w-4 h-4"
-                    >
-                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                  </button>
-                </span>
-
-                <input
-                  type="email"
-                  name="email"
-                  className="py-2 border-b-2 text-sm rounded-md pl-10 focus:outline-none w-10/12 focus:bg-white focus:text-gray-900"
-                  placeholder="Enter your Email Address"
-                  autoComplete="on"
-                  {...register("email", {
-                    required: true,
-                  })}
-                />
-
-            </div>
-
-
-           {/* Password */}
-           <div className="pt-6 text-sm">Password:</div>   
-
-           <div className="relative text-gray-600 focus-within:text-gray-400">
-
-            <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                  <button
-                    type="submit"
-                    className="p-1 focus:outline-none focus:shadow-outline"
-                  >
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      className="w-4 h-4"
-                    >
-                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                  </button>
-            </span>
-
-       <input
-        // className="block w-full mb-2 p-2 border rounded"
-         className="py-2 border-b-2 text-sm rounded-md pl-10 focus:outline-none w-10/12 focus:bg-white focus:text-gray-900"
-        type="password"
-        value={password}
-        placeholder="Password"
-        onChange={e => setPassword(e.target.value)}
-        required
-      />
-
-           </div>
-
-
-      <button className="bg-green-600 text-white px-4 py-2 rounded w-full mt-2" type="submit">
-        Register
-      </button>
-    </form>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
+    <main className="w-full h-screen flex flex-col items-center justify-center bg-gray-50 sm:px-4">
+   
+               <div className="w-full space-y-6 text-gray-600 sm:max-w-md">
+   
+                   <div className="text-center">
+                       {/* <img src="asset/reglogo.svg" width={150} className="mx-auto" /> */}
+                       <div className="mt-5 space-y-2">
+                           <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Create an account</h3>
+                           <p className="">Already have an account? <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">Log in</Link></p>
+                       </div>
+                   </div>
+   
+                   <div className="bg-white shadow-2xl p-4 py-6 sm:p-6 sm:rounded-lg">
+   
+                       <form
+                          onSubmit={handleRegister}
+                           className="space-y-5"
+   
+                       >
+                           <div>
+                               <label className="font-medium">
+                                   Name
+                               </label>
+                               <input
+                                   type="text"
+                                   value={name}
+                                   onChange={e => setName(e.target.value)}
+                                   placeholder="Enter your Name"
+                                   required
+                                   className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                               />
+                           </div>
+   
+                            {/* Email */}
+                           <div>
+                               <label className="font-medium">
+                                   Email
+                               </label>
+                               <input
+                                   type="email"
+                                   name="email"
+                                   value={email}
+                                   onChange={e => setEmail(e.target.value)}
+                                   placeholder="Enter your Email Address"
+                                   required
+                                   className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                               />
+                           </div>
+   
+                            {/* Password */}
+                           <div>
+                               <label className="font-medium">
+                                   Password
+                               </label>
+                               <input
+                                   type="password"
+                                   value={password}
+                                   placeholder="Enter Your Password"
+                                   onChange={e => setPassword(e.target.value)}
+                                   required
+                                   className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                               />
+                           </div>
+   
+                           <button
+                               className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+                               type="submit"
+                           >
+                               Create account
+                           </button>
+                       </form>
+   
+                       <div className="mt-5">
+                           <button className="w-full flex items-center justify-center gap-x-3 py-2.5 mt-5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100">
+                               {/* <svg className="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                   <g clip-path="url(#clip0_17_40)">
+                                       <path d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z" fill="#4285F4" />
+                                       <path d="M24.48 48.0016C30.9529 48.0016 36.4116 45.8764 40.3888 42.2078L32.6549 36.2111C30.5031 37.675 27.7252 38.5039 24.4888 38.5039C18.2275 38.5039 12.9187 34.2798 11.0139 28.6006H3.03296V34.7825C7.10718 42.8868 15.4056 48.0016 24.48 48.0016Z" fill="#34A853" />
+                                       <path d="M11.0051 28.6006C9.99973 25.6199 9.99973 22.3922 11.0051 19.4115V13.2296H3.03298C-0.371021 20.0112 -0.371021 28.0009 3.03298 34.7825L11.0051 28.6006Z" fill="#FBBC04" />
+                                       <path d="M24.48 9.49932C27.9016 9.44641 31.2086 10.7339 33.6866 13.0973L40.5387 6.24523C36.2 2.17101 30.4414 -0.068932 24.48 0.00161733C15.4055 0.00161733 7.10718 5.11644 3.03296 13.2296L11.005 19.4115C12.901 13.7235 18.2187 9.49932 24.48 9.49932Z" fill="#EA4335" />
+                                   </g>
+                                   <defs>
+                                       <clipPath id="clip0_17_40">
+                                           <rect width="48" height="48" fill="white" />
+                                       </clipPath>
+                                   </defs>
+                               </svg> */}
+                               <img src={googleLogo} alt="google logo" className="w-5 h-5" />
+                               Continue with Google
+                           </button>
+                       </div>
+                   </div>
+   
+               </div>
+   
+           </main> 
 
   );
 };
