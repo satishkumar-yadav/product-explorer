@@ -6,6 +6,8 @@ import WishlistButton from "../Button/WishlistButton";
 const ProductItem = ({ product }) => {
   const navigate = useNavigate();
 
+   const calculatedMRP = (product.price / (1 - product.discountPercentage / 100)).toFixed(2);
+
   return (
     <div className="relative bg-white dark:bg-gray-800 rounded shadow p-4 flex flex-col hover:shadow-lg transition group">
       <WishlistButton productId={product.id} />
@@ -19,11 +21,11 @@ const ProductItem = ({ product }) => {
 
       <div className="mt-2 flex justify-between items-center">
         <div>
-          <p> <span className="line-through">₹{(product.price)+200}</span> <span className="font-bold"> ₹{product.price} </span> <span className="text-green-500">{product.discountPercentage}% off</span></p>
+          <p> <span className="line-through">₹{calculatedMRP}</span> <span className="font-bold"> ₹{product.price} </span> <span className="text-green-500">{product.discountPercentage}% off</span></p>
           <p className="text-yellow-500">★ {product.rating} <span>  <CartButton id={product.id} /></span> </p>
         </div>
        
-        
+         
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ const ProductDetails = () => {
 
   if (loading) return <div className="text-center py-4">Loading...</div>;
   if (!details) return <div className="text-center py-4 text-red-500">Product not found!</div>;
-
+ 
   // Calculate MRP based on price and discount percentage
   // Formula: MRP = Price / (1 - discount%)
   const calculatedMRP = (details.price / (1 - details.discountPercentage / 100)).toFixed(2);
